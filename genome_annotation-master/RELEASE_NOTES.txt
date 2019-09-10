@@ -1,0 +1,59 @@
+OVERVIEW
+--------
+
+The genome_annotation service provides the following functionality to its clients:
+
+    Gene calling via Glimmer and Prodigal.
+    RNA calling via search_for_rnas.
+    Special-protein calling (selenoprotein and pyrrolysoprotein).
+    Determination of streptococcus repeat sequences.
+    Protein annotation using the RAST kmer-based annotation algorithms.
+    Metabolic reconstruction.
+    Computation of close neighbors of a genome.
+
+CHANGES - 2/26/2014
+-------------------
+
+Added the following command-line scripts (and associated API calls):
+
+rast2-annotate-proteins-kmer-v1: Annotate CDS features using the SEED
+FIGfam-based Kmers.
+
+scripts/rast2-call-features-CDS-glimmer3: Call CDS features using glimmer.
+
+rast2-call-features-ProtoCDS-kmer-v1: Call "proto-CDS" features from genome
+DNA using the SEED FIGfam-based kmers.
+
+rast2-call-features-ProtoCDS-kmer-v2: Call "proto-CDS" features from genome
+DNA using the SEED function-based kmers.
+
+rast2-export-genome: Export a genome object in a variety of formats.
+
+CHANGES - 1/29/2014
+-------------------
+
+Added the following command-line scripts (and associated API calls):
+
+rast2-call-features-CDS-prodigal: Call CDS features using the Prodigal gene
+caller.
+
+rast2-call-features-rRNA-SEED: Call rRNA features using code from the SEED project.
+
+rast2-call-features-tRNA-trnascan: Call tRNA features using trnascan.
+
+rast2-call-features-repeat-region-SEED: Call repeat region features using code
+from the SEED project.
+
+rast2-call-features-prophage-phispy: Call prophage regions using the phispy
+application.
+
+rast2-annotate-proteins-kmer-v2: Annotate CDS features using the SEED kmer
+method.
+
+rast2-export-genome: Export a genome object to a variety of standard output
+formats.
+
+CHANGES - 8/8/2013
+------------------
+
+At this point the module is generally stable, with no changes made in the recent past. 

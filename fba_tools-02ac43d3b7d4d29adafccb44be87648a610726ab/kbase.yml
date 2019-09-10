@@ -1,0 +1,15 @@
+module-name:
+    fba_tools
+
+module-description:
+    This module includes implementation of official KBase functions that comprise the metabolic modeling pipeline of KBase.
+
+service-language:
+    perl
+
+module-version:
+    1.2.0
+
+owners:
+    [chenry]
+

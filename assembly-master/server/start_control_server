@@ -1,0 +1,51 @@
+#!/bin/bash
+
+TOP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+SHOCK_URL=$ARAST_SHOCK_URL
+
+LIB_DIR=$ARAST_LIB_DIR
+VAR_DIR=$ARAST_VAR_DIR
+CONTROL_CONFIG=$ARAST_CONFIG
+VERBOSE=$ARAST_VERBOSE
+
+LIB_DIR=${LIB_DIR:-$TOP_DIR/lib}
+VAR_DIR=${VAR_DIR:-$TOP_DIR/deployment/var}
+
+LIB_DIR=$LIB_DIR/assembly
+LOG_DIR=$VAR_DIR/log
+
+CONTROL_CONFIG=${CONTROL_CONFIG:-$LIB_DIR/arast.conf}
+
+
+procs=`ps aux |grep arastd.py |grep python`
+if [ -n "$procs" ]; then
+    echo 'Error: another control server may be running.'
+    exit 1
+fi
+
+
+mkdir -p $LOG_DIR
+
+ARG_SHOCK=$( [[ -z "$SHOCK_URL" ]] && echo "" || echo "--shock-url $SHOCK_URL")
+ARG_VERBOSE=$( [[ -z "$VERBOSE" ]] && echo "" || echo "--verbose")
+
+args=( $ARG_SHOCK $ARG_VERBOSE
+       --config $CONTROL_CONFIG
+       --logfile $LOG_DIR/ar_server.log )
+
+nohup $LIB_DIR/arastd.py "${args[@]}" > $LOG_DIR/ar_server.out 2>&1 &
+echo $! >$VAR_DIR/ar_server.pid
+pid=$(cat $VAR_DIR/ar_server.pid)
+cmd="$LIB_DIR/arastd.py ${args[@]} > $LOG_DIR/ar_server.out 2>&1 &"
+
+sleep 2
+if [[ -z $(ps -f -p $pid | grep arastd) ]]; then
+    echo "ERROR: ARAST control server failed to start."
+    echo "Command: $cmd"
+    exit 1
+else
+    echo "ARAST control server started: pid = $pid"
+    echo "Command: $cmd"
+    echo
+fi

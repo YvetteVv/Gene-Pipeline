@@ -1,0 +1,41 @@
+[Core]
+Name = masurca
+Module = masurca
+
+[Executables]
+executable = masurca/bin/runSRCA.pl
+jellyfish_path = masurca/bin
+sr_path = masurca/bin
+ca_path = masurca/CA/Linux-amd64/bin
+
+[Settings]
+short_name = ma
+filetypes = fasta,fa,fastq,fq
+
+graph_kmer_size = auto
+use_linking_mates = auto
+limit_jump_coverage = 60
+ca_parameters = ovlMerSize=30 cgwErrorRate=0.25 ovlMemory=4GB
+kmer_count_threshold = 1
+num_threads = auto
+jf_size = 2000000000
+do_homopolymer_trim = 0
+
+[Parameters]
+graph_kmer_size = auto
+use_linking_mates = auto
+limit_jump_coverage = 60
+ca_parameters = ovlMerSize=30 cgwErrorRate=0.25 ovlMemory=4GB
+kmer_count_threshold = 1
+num_threads = auto
+jf_size = 2000000000
+do_homopolymer_trim = 0
+
+
+[Documentation]
+Author = Chris Bun
+Version = 0.5
+Description = MaSuRCA assembler based on a hybrid graph & overlap based algorithms
+Stages = assembler
+References = 10.1093/bioinformatics/btt476
+

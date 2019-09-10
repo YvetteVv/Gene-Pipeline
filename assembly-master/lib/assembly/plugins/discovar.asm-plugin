@@ -1,0 +1,22 @@
+[Core]
+Name = discovar
+Module = discovar
+
+[Executables]
+executable = discovar
+
+[Settings]
+short_name = ds
+filetypes = fastq,fq
+dashes = 1
+contig_threshold = 300
+picard = /usr/bin/picard-tools
+
+[Parameters]
+
+[Documentation]
+Author = Fangfang Xia
+Version = 0.1
+Description = Discovar assembly pipeline for illumina 250+ bp reads
+Stages = preprocess,assembler,post-process
+References = http://www.broadinstitute.org/software/discovar/blog

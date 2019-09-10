@@ -1,0 +1,59 @@
+ifeq ($(KB_TOP),)
+     $(error The KB_TOP environment is not set - have you sourced your user-env.sh file?)
+endif
+
+RUNTIME_BIN = $(shell if [[ -x $(KB_RUNTIME)/bin/perl ]] ; then echo $(KB_RUNTIME)/bin ; else echo $(DEPLOY_RUNTIME)/bin ; fi )
+PERL = $(RUNTIME_BIN)/perl
+TPAGE = $(RUNTIME_BIN)/tpage
+
+SERVICE_USER = kbase
+
+BIN_DIR = $(TOP_DIR)/bin
+TOOLS_DIR = $(TOP_DIR)/tools
+LIBEXEC_DIR = $(KB_TOP)/libexec
+
+CURRENT_DIR = $(notdir $(shell pwd))
+
+WRAP_PERL_TOOL = wrap_perl
+WRAP_PERL_SCRIPT = bash $(TOOLS_DIR)/$(WRAP_PERL_TOOL).sh
+
+SRC_PERL = $(wildcard scripts/*.pl)
+BIN_PERL = $(addprefix $(BIN_DIR)/,$(basename $(notdir $(SRC_PERL))))
+
+DEPLOY_PERL = $(addprefix $(TARGET)/bin/,$(basename $(notdir $(SRC_PERL))))
+
+WRAP_PYTHON_TOOL = wrap_python
+WRAP_PYTHON_SCRIPT = bash $(TOOLS_DIR)/$(WRAP_PYTHON_TOOL).sh
+
+SRC_PYTHON = $(wildcard scripts/*.py)
+BIN_PYTHON = $(addprefix $(BIN_DIR)/,$(basename $(notdir $(SRC_PYTHON))))
+
+DEPLOY_PYTHON = $(addprefix $(TARGET)/bin/,$(basename $(notdir $(SRC_PYTHON))))
+
+WRAP_SH_TOOL = wrap_sh
+WRAP_SH_SCRIPT = bash $(TOOLS_DIR)/$(WRAP_SH_TOOL).sh
+
+SRC_SH = $(wildcard scripts/*.sh)
+BIN_SH = $(addprefix $(BIN_DIR)/,$(basename $(notdir $(SRC_SH))))
+
+DEPLOY_SH = $(addprefix $(TARGET)/bin/,$(basename $(notdir $(SRC_SH))))
+
+WRAP_R_TOOL = wrap_rscript
+WRAP_R_SCRIPT = bash $(TOOLS_DIR)/$(WRAP_R_TOOL).sh
+
+SRC_R = $(wildcard scripts/*.R)
+BIN_R = $(addprefix $(BIN_DIR)/,$(basename $(notdir $(SRC_R))))
+
+DEPLOY_RSCRIPT = $(addprefix $(TARGET)/bin/,$(basename $(notdir $(SRC_R))))
+
+SERVICE_DIR = $(TARGET)/services/$(SERVICE)
+
+SERVICE_SUBDIRS = webroot
+
+#TPAGE = $(DEPLOY_RUNTIME)/bin/perl $(DEPLOY_RUNTIME)/bin/tpage
+MK_CONFIG = $(TOOLS_DIR)/mkcfg
+
+JAVA = java
+JAVAC = javac
+JAVAC_FLAGS = 
+JAR = jar

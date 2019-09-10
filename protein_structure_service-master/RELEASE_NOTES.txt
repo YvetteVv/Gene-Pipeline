@@ -1,0 +1,23 @@
+OVERVIEW
+------------------------------------------
+This service provides users methods for finding Protein Structure Data
+Bank (PDB) entries whose protein sequences are similar to a KBase
+protein sequence, specified by either a MD5 id or a feature or coding
+sequence id.  Deployment documentation is in README.md in this
+directory.
+
+Version 0.02
+-------------------------------------------
+Lowered blastp match threshold to 30% identity over 80% alignment length
+
+Version 0.01 (GIT commit on 3/12/2013)
+-------------------------------------------
+NEW FEATURES:
+-The first internal release.  All methods are new.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none so far.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-public release of the service
+

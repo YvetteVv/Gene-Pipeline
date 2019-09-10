@@ -1,0 +1,21 @@
+[Core]
+Name = sga_ec
+Module = sga_ec
+
+[Executables]
+executable = a5/bin/sga
+
+[Settings]
+short_name = sgae
+filetypes = fastq,fq
+dependencies = sga_preprocess
+
+[Parameters]
+
+[Documentation]
+Author = Chris Bun
+Version = 1.0
+Description = SGA component for error correction (runs subcommands: 'index' & 'correct')
+Stages = preprocess
+References = doi:10.1101/gr.126953.111
+

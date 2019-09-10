@@ -1,0 +1,20 @@
+[Core]
+Name = prodigal
+Module = prodigal
+
+[Executables]
+executable = prodigal/prodigal
+
+[Settings]
+short_name = pd
+filetypes = fasta,fa
+
+[Parameters]
+
+
+[Documentation]
+Author = Chris Bun
+Version = 0.5
+Description = Prodigal microbial gene predictor
+Stages = post-process
+References = doi:10.1186/1471-2105-11-119

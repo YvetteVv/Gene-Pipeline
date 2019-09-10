@@ -1,0 +1,33 @@
+[Core]
+Name = sga_preprocess
+Module = sga_preprocess
+
+[Executables]
+executable = a5/bin/sga
+
+[Settings]
+short_name = sgap
+filetypes = fastq,fq
+
+# From A5 defaults
+#SGA_Q_TRIM => 10
+#SGA_Q_FILTER => 20
+#SGA_MIN_READ_LENGTH => 29
+quality_trim = 10
+quality_filter = 20
+min_length = 29
+permute_ambiguous = True
+
+[Parameters]
+quality_trim = 10
+quality_filter = 20
+min_length = 29
+permute_ambiguous = True
+
+
+[Documentation]
+Author = Chris Bun
+Version = 1.0
+Description = SGA component for preprocessing reads (runs subcommand 'preprocess')
+Stages = preprocess
+References = doi:10.1101/gr.126953.111

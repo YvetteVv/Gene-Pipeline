@@ -1,0 +1,20 @@
+[Core]
+Name = bowtie2
+Module = bowtie2
+
+[Executables]
+executable = bowtie2/bowtie2
+build_bin = bowtie2/bowtie2-build
+
+[Settings]
+filetypes = fastq,fq
+
+[Parameters]
+
+[Documentation]
+Author = Chris Bun
+Version = 1.0
+Description = Bowtie2 aligner that maps reads to contigs
+Stages = post-process
+References = doi:10.1038/nmeth.1923
+

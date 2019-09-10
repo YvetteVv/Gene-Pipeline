@@ -1,0 +1,25 @@
+[Core]
+Name = trim_sort
+Module = trim_sort
+
+[Executables]
+bin_dynamictrim = solexa/DynamicTrim.pl
+bin_lengthsort = solexa/LengthSort.pl
+
+[Settings]
+short_name = dtrim
+filetypes = fastq,fq
+
+probcutoff = 0.05
+length = 25
+
+[Parameters]
+probcutoff = 0.05
+length = 25
+
+[Documentation]
+Author = Chris Bun
+Version = 1.0
+Description = DynamicTrim and LengthSort from SolexaQA
+Stages = preprocess
+References = doi:10.1186/1471-2105-11-485

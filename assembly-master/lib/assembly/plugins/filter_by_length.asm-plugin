@@ -1,0 +1,28 @@
+[Core]
+Name = filter_by_length
+Module = filter_by_length
+
+[Executables]
+seqtk_bin = seqtk
+sync_bin = sync_paired_end_reads.py
+
+[Settings]
+short_name = ftr
+filetypes = fasta,fa,fastq,fq
+min = 250
+end = 200
+sync = True
+
+[Parameters]
+min = 250
+end = 200
+sync = True
+
+
+[Documentation]
+Author = Chris Bun
+Version = 1.0
+Description = Length-based sequencing reads filter and trimmer based on seqtk
+Stages = preprocess
+References = https://github.com/levinas/seqtk
+

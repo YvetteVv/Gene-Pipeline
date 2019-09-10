@@ -1,0 +1,78 @@
+OVERVIEW
+--------------------------------------
+This service allows users to assemble genomes and metagenomes with
+their choice of assembly algorithm.  Currently supports over 20 modules
+including preprocessing tools and assemblers. 
+
+
+VERSION: 0.5.3 (Released 07/15/2014)
+--------------------------------------
+NEW FEATURES:
+- Support for assembly recipes
+- Support for auto selection of assembly 
+- Blocking option for retrieving assembly results 
+- New options for retrieving assembly statistics or logs separately
+- Support for chaining assembly commands using pipes
+
+
+VERSION: 0.2.0 (Released 01/07/2014)
+--------------------------------------
+NEW FEATURES:
+- New assembly modules: ray, pacbio, fastqc...
+- New 'ar-avail' command for detailed information on assembly modules
+- ar-upload command that supports uploading assembly input data to workspace
+
+---
+
+VERSION: 0.1.0 (Released 08/08/2013)
+--------------------------------------
+NEW FEATURES:
+- Support for reference files (quality assessment)
+- ~20 new pipeline modules
+- Support for paired-end insert size settings
+- Support for compressed files
+- RESTful API
+- Assembly evalution/viz generated
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+- Verbose job reports / module logs
+- Major backend robustness
+- CLI client: file integrity checks
+- CLI client: Now using REST commands (fewer dependencies)
+
+---
+
+
+VERSION: 0.0.2 (Released 02/04/2013)
+--------------------------------------
+NEW FEATURES:
+- Supports authentication service
+- User login, job namespace
+- Initial support for paired-end reads for velvet
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+- None
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+- Integration with clusster service for metagenomic assembly
+- More assemblers: Mira, AllPaths-LG, ...
+- Preprocessing and postprocessing steps
+- Assembly quality score
+
+---
+
+VERSION: 0.0.1 (Released 11/20/2012)
+--------------------------------------
+NEW FEATURES:
+- This is the first public release of the assembly service.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+- None
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+- Better support for paired-end reads
+- Integration with authentication service
+- Integration with clusster service for metagenomic assembly
+- More assemblers: Mira, AllPaths-LG, ...
+- Preprocessing and postprocessing steps
+- Assembly quality score

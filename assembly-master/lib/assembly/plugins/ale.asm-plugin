@@ -1,0 +1,19 @@
+[Core]
+Name = ale
+Module = ale
+
+[Executables]
+executable = ale/ALE
+
+[Settings]
+short_name = ale
+filetypes = bam,sam,fasta,fa
+
+[Parameters]
+
+[Documentation]
+Author = Chris Bun
+Version = 0.1
+Description = ALE likelihood-based estimator of assembly quality
+Stages = post-process
+References = doi: 10.1093/bioinformatics/bts723

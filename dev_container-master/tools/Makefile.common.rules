@@ -1,0 +1,87 @@
+deploy-wft:
+	mkdir -p $(TARGET)/lib/Bio/KBase/$(SERVICE_NAME)/
+	cp wft/*.template $(TARGET)/lib/Bio/KBase/$(SERVICE_NAME)/
+
+deploy-dir-service:
+	if [ ! -d $(SERVICE_DIR) ] ; then mkdir -p $(SERVICE_DIR) ; fi
+	if [ "$(SERVICE_SUBDIRS)" != "" ] ; then \
+		for dir in $(SERVICE_SUBDIRS) ; do \
+		    	if [ ! -d $(SERVICE_DIR)/$$dir ] ; then mkdir -p $(SERVICE_DIR)/$$dir ; fi \
+		done;  \
+	fi
+
+deploy-scripts: deploy-perl-scripts deploy-python-scripts deploy-sh-scripts deploy-r-scripts
+
+deploy-perl-scripts:
+	export KB_TOP=$(TARGET); \
+	export KB_RUNTIME=$(DEPLOY_RUNTIME); \
+	export KB_PERL_PATH=$(TARGET)/lib ; \
+	for src in $(SRC_PERL) ; do \
+		basefile=`basename $$src`; \
+		base=`basename $$src .pl`; \
+		echo install $$src $$base ; \
+		cp $$src $(TARGET)/plbin ; \
+		$(WRAP_PERL_SCRIPT) "$(TARGET)/plbin/$$basefile" $(TARGET)/bin/$$base ; \
+	done 
+
+deploy-python-scripts:
+	export KB_TOP=$(TARGET); \
+	export KB_RUNTIME=$(DEPLOY_RUNTIME); \
+	export KB_PYTHON_PATH=$(TARGET)/lib ; \
+	for src in $(SRC_PYTHON) ; do \
+		basefile=`basename $$src`; \
+		base=`basename $$src .py`; \
+		echo install $$src $$base ; \
+		cp $$src $(TARGET)/pybin ; \
+		$(WRAP_PYTHON_SCRIPT) "$(TARGET)/pybin/$$basefile" $(TARGET)/bin/$$base ; \
+	done 
+
+deploy-sh-scripts:
+	export KB_TOP=$(TARGET); \
+	export KB_RUNTIME=$(DEPLOY_RUNTIME); \
+	for src in $(SRC_SH) ; do \
+		basefile=`basename $$src`; \
+		base=`basename $$src .sh`; \
+		echo install $$src $$base ; \
+		cp $$src $(TARGET)/shbin ; \
+		$(WRAP_SH_SCRIPT) "$(TARGET)/shbin/$$basefile" $(TARGET)/bin/$$base ; \
+	done 
+
+deploy-r-scripts:
+	export KB_TOP=$(TARGET); \
+	export KB_RUNTIME=$(DEPLOY_RUNTIME); \
+	export KB_R_PATH=$(TARGET)/lib ; \
+	for src in $(SRC_R) ; do \
+		basefile=`basename $$src`; \
+		base=`basename $$src .R`; \
+		echo install $$src $$base ; \
+		cp $$src $(TARGET)/rsbin ; \
+		$(WRAP_R_SCRIPT) "$(TARGET)/rsbin/$$basefile" $(TARGET)/bin/$$base ; \
+	done
+
+deploy-libs:
+	rsync --exclude '*.bak*' -arv lib/. $(TARGET)/lib/.
+
+deploy-cfg:
+	$(DEPLOY_RUNTIME)/bin/perl $(MK_CONFIG) -t $(TARGET)
+#
+# We depend on the toplevel user-env so that a re-bootstrap
+# will cause the scripts to be rebuilt. This eliminates a class
+# of non-obvious errors where the perl/python library path
+# in the wrapped script don't have additional libraries that were
+# added.
+#
+$(BIN_DIR)/%: scripts/%.sh $(TOP_DIR)/user-env.sh
+	$(WRAP_SH_SCRIPT) '$$KB_TOP/modules/$(CURRENT_DIR)/$<' $@
+
+$(BIN_DIR)/%: scripts/%.pl $(TOP_DIR)/user-env.sh
+	$(WRAP_PERL_SCRIPT) '$$KB_TOP/modules/$(CURRENT_DIR)/$<' $@
+
+$(BIN_DIR)/%: scripts/%.py
+	$(WRAP_PYTHON_SCRIPT) '$$KB_TOP/modules/$(CURRENT_DIR)/$<' $@
+
+$(BIN_DIR)/%: scripts/%.R $(TOP_DIR)/user-env.sh
+	$(WRAP_R_SCRIPT) '$$KB_TOP/modules/$(CURRENT_DIR)/$<' $@
+
+%.class: %.java
+	 $(JAVAC) $(JAVAC_FLAGS) $<

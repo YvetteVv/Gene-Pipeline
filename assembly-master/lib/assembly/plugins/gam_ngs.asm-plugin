@@ -1,0 +1,21 @@
+[Core]
+Name = gam_ngs
+Module = gam_ngs
+
+[Executables]
+bin_create = gam-ngs/bin/gam-create
+bin_merge = gam-ngs/bin/gam-merge
+
+[Settings]
+short_name = gam
+filetypes = fasta,fa
+
+[Parameters]
+
+[Documentation]
+Author = Chris Bun
+Version = 0.1
+Description = GAM-NGS genomic assemblies merger
+Stages = post-process
+References = doi:10.1186/1471-2105-14-S7-S6
+
